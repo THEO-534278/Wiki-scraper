@@ -27,7 +27,7 @@ def printsoup(htmlID, htmlclass, URL):
     soup = BeautifulSoup(response.content, 'html.parser')
     try:
         title = soup.find(htmlclass, id=htmlID).text
-        print("\n", title)
+        print("\n\n", title)
     except:
         print("\n an error has occured, probably missing id")
 

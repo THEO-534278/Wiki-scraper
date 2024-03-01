@@ -1,0 +1,31 @@
+from flask import *
+
+from webscapingcode import soupscrape
+
+from bs4 import BeautifulSoup
+
+app = Flask(__name__)
+
+@app.route("/")
+
+
+
+@app.route('/scrape', methods=['POST'])
+
+def main():
+    return render_template("main.html")
+
+def scrape():
+    url = request.json['url']
+
+    soupdata = soupscrape('h1', 'firstHeading', url)
+
+    scraped_data = "Scraped data from " + url
+    print(soupdata)
+
+    return jsonify(soupdata)
+
+if __name__ == '__main__':
+    app.run('0.0.0.0')
+
+

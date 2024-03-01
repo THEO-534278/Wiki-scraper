@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraping with Beautiful Soup</title>
+    <link rel="stylesheet" type="text/css" href={{ url_for("static", filename="style.css") }}>
+</head>
+<body>
+    <header>Web Scraping with Beautiful Soup</header>
+    <form id="wikiForm">
+        <br>
+        <input type="text" id="urlInput" name="urlInput" placeholder="enter wiki link">
+        <br>
+        <button type="button" onclick="scrapeData()">Scrape Data</button>
+    </form>
+
+    <div>
+        <p id="output">content</p>
+    </div>
+
+    <script>
+        function scrapeData() {
+            document.getElementById("output").innerHTML = 'Loading...';
+            var url = 'https://en.wikipedia.org/wiki/' + document.getElementById("urlInput").value;
+
+            fetch('/scrape', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerHTML = data; // Display the scraped data
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

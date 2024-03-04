@@ -1,5 +1,5 @@
 
-
+from flask import jsonify
 import urllib.request
 import requests
 from bs4 import BeautifulSoup
@@ -24,8 +24,19 @@ def soupscrape(htmlID, htmlclass, URL):
     response = requests.get(URL)
     soup = BeautifulSoup(response.content, 'html.parser')
     try:
-        foundscraped = soup.find(htmlclass, id=htmlID).text
+        pulled = soup.find(htmlclass, htmlID)
+        foundscraped = pulled
         return(foundscraped)
     except:
         return('errorz')
 
+
+#htmlid = input("htmlID")
+
+#htmlclass = input("htmlclass")
+
+#url = input("URL")
+
+#print(soupscrape(htmlid, htmlclass, url))
+
+#print(jsonify(soupscrape(htmlid, htmlclass, url)))

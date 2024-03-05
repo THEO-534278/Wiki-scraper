@@ -41,6 +41,8 @@ def scrape():
     url = data['url']
     scraped_data = soupscrape('firstHeader', 'h1', url)
     return jsonify(scraped_data)
+    print(jsonify(scraped_data))
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
